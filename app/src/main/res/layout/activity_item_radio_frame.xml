@@ -1,0 +1,43 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.kuntseva.radio2.com.example.kuntseva.view_plus_controller.ItemRadioFrame"
+    android:background="#ff000000">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageViewItem"
+        android:layout_marginBottom="@android:dimen/app_icon_size" />
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewItem"
+            android:layout_weight="1"
+            android:textSize="30dp"
+            android:textIsSelectable="false"
+            android:textColor="#f9fcff21"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/buttonItem"
+            android:layout_weight="1"
+            android:textColor="#f9fcff21"
+            android:textStyle="bold"
+            android:singleLine="false"
+            android:background="#ff6a7670" />
+    </TableRow>
+
+
+</TableLayout>
