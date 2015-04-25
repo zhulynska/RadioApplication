@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="yellow" type="color">#f9fcff21</item>
+    <item name="grey_darker" type="color">#871C0F13</item>
+    <item name="grey_lighter" type="color">#3E0C061B</item>
+    <item name="white" type="color">#083AE8D7</item>
+    <item name="red" type="color">#F9FF2133</item>
+</resources>

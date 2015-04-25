@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/textViewItem"
             android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textIsSelectable="false"
             android:textColor="#f9fcff21"
             android:textStyle="bold" />
@@ -33,10 +33,11 @@
             android:text="New Button"
             android:id="@+id/buttonItem"
             android:layout_weight="1"
-            android:textColor="#f9fcff21"
             android:textStyle="bold"
             android:singleLine="false"
-            android:background="#ff6a7670" />
+            style="@style/button">
+
+        </Button>
     </TableRow>
 
 
