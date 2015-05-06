@@ -3,18 +3,15 @@ package com.example.kuntseva.radio2.com.example.kuntseva.view_plus_controller;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.kuntseva.radio2.R;
@@ -32,7 +29,7 @@ public class ItemRadioFrame extends ActionBarActivity implements View.OnClickLis
     RadioData radioData;
     static String PAUSE = "Pause";
     static String PLAY = "Play";
-    static String RESUME = "Resume";
+    //static String RESUME = "Resume";
     int length;
     Intent myIntent;
 
