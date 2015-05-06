@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import java.io.IOException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 
 public class ItemRadioFrame extends ActionBarActivity implements View.OnClickListener, MediaPlayer.OnPreparedListener {
@@ -37,12 +39,19 @@ public class ItemRadioFrame extends ActionBarActivity implements View.OnClickLis
     final String LOG_TAG = this.getClass().getSimpleName();
     @InjectView(R.id.buttonItem)
     Button buttonItem;
+
+    @InjectView(R.id.imageButtonRefresh)
+    ImageButton imageButtonRefresh;
+
+
+
     @InjectView(R.id.textViewItem)
     TextView textViewItem;
     @InjectView(R.id.imageViewItem)
     ImageView imageViewItem;
-    MediaPlayer mediaPlayer = null;
 
+    MediaPlayer mediaPlayer = null;
+    boolean b = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
@@ -53,6 +62,9 @@ public class ItemRadioFrame extends ActionBarActivity implements View.OnClickLis
             ButterKnife.inject(this);
 
             Intent intent = this.getIntent();
+
+
+            imageButtonRefresh.setEnabled(false);
 
             radioData = (RadioData) intent.getSerializableExtra("radioData");
 
@@ -74,6 +86,7 @@ public class ItemRadioFrame extends ActionBarActivity implements View.OnClickLis
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setOnPreparedListener(this);
             mediaPlayer.setDataSource(radioData.getURL());
+            //mediaPlayer.prepare();
 
             setTitle(radioData.getTitle());
 
@@ -117,6 +130,98 @@ public class ItemRadioFrame extends ActionBarActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         try {
+
+
+            if (buttonItem.getText().equals(PLAY) && !mediaPlayer.isPlaying() ) {
+               // if (!mediaPlayer.isPlaying()) {
+                    mediaPlayer.prepareAsync();
+                    buttonItem.setText(PAUSE);
+
+                imageButtonRefresh.setEnabled(false);
+                //}
+              //  b = false;
+
+
+            }
+
+            else if (buttonItem.getText().equals(PAUSE)) {
+
+                mediaPlayer.stop();
+
+                //length = mediaPlayer.getCurrentPosition();
+                buttonItem.setText(PLAY);
+
+                imageButtonRefresh.setEnabled(true);
+               // Log.v(LOG_TAG, "seek to" + length);
+                //b = false;
+            }
+
+            else if (buttonItem.getText().equals(PLAY) && mediaPlayer.isPlaying()) {
+               // mediaPlayer.seekTo(length);
+                mediaPlayer.start();
+                buttonItem.setText(PAUSE);
+                //buttonReset.setEnabled(false);
+                imageButtonRefresh.setEnabled(false);
+                //b = false;
+            }
+        } catch (Exception e) {
+            Log.v(LOG_TAG, "On click exception", e);
+        }
+    }
+
+
+    @OnClick(R.id.imageButtonRefresh)
+    public void resetPlayer1() {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        try {
+
+            Log.v(LOG_TAG, "buttonReset clicked");
+
+
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mediaPlayer.setOnPreparedListener(this);
+
+            mediaPlayer.setDataSource(radioData.getURL());
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+   /* @OnClick(R.id.buttonReset)
+    public void resetPlayer() {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        try {
+
+            Log.v(LOG_TAG, "buttonReset clicked");
+
+
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mediaPlayer.setOnPreparedListener(this);
+
+             mediaPlayer.setDataSource(radioData.getURL());
+
+
+        } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+    }*/
+
+
+
+    /*
+        public void onClick(View v) {
+        try {
             boolean b = true;
 
 
@@ -144,6 +249,7 @@ public class ItemRadioFrame extends ActionBarActivity implements View.OnClickLis
             Log.v(LOG_TAG, "On click exception", e);
         }
     }
+     */
 
 
     @Override
