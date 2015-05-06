@@ -41,7 +41,6 @@ public class ItemRadioFrame extends ActionBarActivity implements View.OnClickLis
     ImageButton imageButtonRefresh;
 
 
-
     @InjectView(R.id.textViewItem)
     TextView textViewItem;
     @InjectView(R.id.imageViewItem)
@@ -49,6 +48,7 @@ public class ItemRadioFrame extends ActionBarActivity implements View.OnClickLis
 
     MediaPlayer mediaPlayer = null;
     boolean b = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
@@ -83,8 +83,6 @@ public class ItemRadioFrame extends ActionBarActivity implements View.OnClickLis
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setOnPreparedListener(this);
             mediaPlayer.setDataSource(radioData.getURL());
-            //mediaPlayer.prepare();
-
             setTitle(radioData.getTitle());
 
         } catch (IOException e) {
@@ -122,6 +120,7 @@ public class ItemRadioFrame extends ActionBarActivity implements View.OnClickLis
 
     /**
      * is used to start playing, pause and resume media player
+     *
      * @param v - Button
      */
     @Override
@@ -129,40 +128,25 @@ public class ItemRadioFrame extends ActionBarActivity implements View.OnClickLis
         try {
 
 
-            if (buttonItem.getText().equals(PLAY) && !mediaPlayer.isPlaying() ) {
-               // if (!mediaPlayer.isPlaying()) {
-                    mediaPlayer.prepareAsync();
-                    buttonItem.setText(PAUSE);
-
+            if (buttonItem.getText().equals(PLAY) && !mediaPlayer.isPlaying()) {
+                mediaPlayer.prepareAsync();
+                buttonItem.setText(PAUSE);
                 imageButtonRefresh.setEnabled(false);
-                //}
-              //  b = false;
-
-
-            }
-
-            else if (buttonItem.getText().equals(PAUSE)) {
+                Log.v(LOG_TAG, "Start playing");
+            } else if (buttonItem.getText().equals(PAUSE)) {
 
                 mediaPlayer.stop();
-
-                //length = mediaPlayer.getCurrentPosition();
                 buttonItem.setText(PLAY);
-
                 imageButtonRefresh.setEnabled(true);
-               // Log.v(LOG_TAG, "seek to" + length);
-                //b = false;
-            }
-
-            else if (buttonItem.getText().equals(PLAY) && mediaPlayer.isPlaying()) {
-               // mediaPlayer.seekTo(length);
+                Log.v(LOG_TAG, "Pause clicked");
+            } else if (buttonItem.getText().equals(PLAY) && mediaPlayer.isPlaying()) {
                 mediaPlayer.start();
                 buttonItem.setText(PAUSE);
-                //buttonReset.setEnabled(false);
                 imageButtonRefresh.setEnabled(false);
-                //b = false;
+                Log.v(LOG_TAG, "continue playing");
             }
         } catch (Exception e) {
-            Log.v(LOG_TAG, "On click exception", e);
+            Log.e(LOG_TAG, "On click exception", e);
         }
     }
 
@@ -172,49 +156,15 @@ public class ItemRadioFrame extends ActionBarActivity implements View.OnClickLis
         mediaPlayer.stop();
         mediaPlayer.release();
         try {
-
-            Log.v(LOG_TAG, "buttonReset clicked");
-
-
+            Log.v(LOG_TAG, "buttonRefresh clicked");
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setOnPreparedListener(this);
-
             mediaPlayer.setDataSource(radioData.getURL());
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
-
-
-   /* @OnClick(R.id.buttonReset)
-    public void resetPlayer() {
-        mediaPlayer.stop();
-        mediaPlayer.release();
-        try {
-
-            Log.v(LOG_TAG, "buttonReset clicked");
-
-
-            mediaPlayer = new MediaPlayer();
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            mediaPlayer.setOnPreparedListener(this);
-
-             mediaPlayer.setDataSource(radioData.getURL());
-
-
-        } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-    }*/
-
-
 
     /*
         public void onClick(View v) {
@@ -251,7 +201,7 @@ public class ItemRadioFrame extends ActionBarActivity implements View.OnClickLis
 
     @Override
     public void onPrepared(MediaPlayer mp) {
-            mp.start();
+        mp.start();
     }
 
 

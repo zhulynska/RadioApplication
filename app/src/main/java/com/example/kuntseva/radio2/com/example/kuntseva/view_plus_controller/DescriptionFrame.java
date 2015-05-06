@@ -30,8 +30,8 @@ public class DescriptionFrame extends ActionBarActivity {
         setContentView(R.layout.activity_description_frame);
         ButterKnife.inject(this);
         Intent intent = this.getIntent();
-        RadioData radioItem = (RadioData)intent.getSerializableExtra("radioData");
-         description.setText(radioItem.get_description());
+        RadioData radioItem = (RadioData) intent.getSerializableExtra("radioData");
+        description.setText(radioItem.get_description());
         setTitle(radioItem.getTitle());
     }
 

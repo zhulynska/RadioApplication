@@ -96,7 +96,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         list1.setOnItemClickListener(this);
 
 
-
     }
 
 
@@ -123,11 +122,11 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-      int id = item.getItemId();
-       if (id == R.id.action_settings) {
-          Intent  myIntent = new Intent(MainActivity.this, AboutAuthorActivity.class);
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent myIntent = new Intent(MainActivity.this, AboutAuthorActivity.class);
             startActivity(myIntent);
-      return true;
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
